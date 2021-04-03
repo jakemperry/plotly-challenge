@@ -9,6 +9,7 @@
 - Use `otu_ids` as the labels for the bar chart.
 - Use `otu_labels` as the overtext for the chart.
 > Check the music streaming services example and the stock prices example from class.
+> See [this plotly guide for horizontal bar charts](https://plotly.com/javascript/horizontal-bar-charts/)
 
 3. Create a bubble chart that displays each sample.
 - Use `otu_ids` for the x values.
@@ -16,11 +17,13 @@
 - Use `sample_values` for the marker size.
 - Use `otu_ids` for the marker colors.
 - use `otu_labels` for the text values.
-> 
+> See [this plotly guide for bubble charts](https://plotly.com/javascript/bubble-charts/)
 
 4. Display the sample metadata, i.e., an individual's demographic information.
+> Try using [cards](https://getbootstrap.com/docs/4.0/components/card/) from Bootstrap to format the look of the demographic info.
 
 5. Display each key-value pair from the metadata JSON object somewhere on the page.
+> Get the metadata from `samples.json` and display it in the demographics card.
 
 6. Update all of the plots any time that a new sample is selected.
 > - Make an `init()` function that will plot the first individual's data as a default when the page is first loaded.
