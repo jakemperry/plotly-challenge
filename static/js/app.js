@@ -1,4 +1,4 @@
-//Update the dropdown menu with all of the individual ids.
+//Declare variables with placeholders
 var samplesData = [];
 var currentID = "";
 var dropdownMenu = d3.select("#selDataset");
@@ -13,14 +13,17 @@ var hLabels = [];
 var sample_values_H=[]
 var bubbleSizes = []
 
+//Create a function to filter samples
 function filterSamples(sample){
     return sample.id === currentID;
 }
 
+//Create a function to filter metadata (must parseInt since IDs are integers in the metadata)
 function filterMeta(metadata){
     return metadata.id === parseInt(currentID);
 }
 
+//Load up the data
 d3.json('samples.json').then(function init(data){
     samplesData = data
     d3.select('#selDataset').selectAll('option')
@@ -30,60 +33,61 @@ d3.json('samples.json').then(function init(data){
             .attr('value',d => d)
             .text(d => d);
     console.log(samplesData)
-    dropdownMenu = d3.select("#selDataset")
-    currentID = dropdownMenu.property("value")
-    console.log(currentID)
-    currentSample = samplesData.samples.filter(filterSamples)
-    currentMeta = samplesData.metadata.filter(filterMeta)
-    var metaKeys = Object.keys(currentMeta[0]);
-    var metaValues = Object.values(currentMeta[0]);
-    console.log(metaKeys)
-    console.log(metaValues)
-    d3.select('#sample-metadata')
-        .html(`<p>${metaKeys[0]}: ${metaValues[0]}
-        <br>${metaKeys[1]}: ${metaValues[1]}
-        <br>${metaKeys[2]}: ${metaValues[2]}
-        <br>${metaKeys[3]}: ${metaValues[3]}
-        <br>${metaKeys[4]}: ${metaValues[4]}
-        <br>${metaKeys[5]}: ${metaValues[5]}
-        <br>${metaKeys[6]}: ${metaValues[6]}</p>`)
-    console.log("currentSample")
-    console.log(currentSample)
-    console.log(currentMeta)
-    sample_values = currentSample[0].sample_values
-    otu_ids = currentSample[0].otu_ids
-    otu_ids_H = otu_ids.slice(0,10).reverse()
-    otu_ids_H.forEach((d,i)=> {
-        hLabels[i] = `OTU ${d}`;
-    })
-    sample_values.forEach((d,i) => {
-        bubbleSizes[i] = d ** 1.7;
-    })
+    reloadCharts()
+    // dropdownMenu = d3.select("#selDataset")
+    // currentID = dropdownMenu.property("value")
+    // console.log(currentID)
+    // currentSample = samplesData.samples.filter(filterSamples)
+    // currentMeta = samplesData.metadata.filter(filterMeta)
+    // var metaKeys = Object.keys(currentMeta[0]);
+    // var metaValues = Object.values(currentMeta[0]);
+    // console.log(metaKeys)
+    // console.log(metaValues)
+    // d3.select('#sample-metadata')
+    //     .html(`<p>${metaKeys[0]}: ${metaValues[0]}
+    //     <br>${metaKeys[1]}: ${metaValues[1]}
+    //     <br>${metaKeys[2]}: ${metaValues[2]}
+    //     <br>${metaKeys[3]}: ${metaValues[3]}
+    //     <br>${metaKeys[4]}: ${metaValues[4]}
+    //     <br>${metaKeys[5]}: ${metaValues[5]}
+    //     <br>${metaKeys[6]}: ${metaValues[6]}</p>`)
+    // console.log("currentSample")
+    // console.log(currentSample)
+    // console.log(currentMeta)
+    // sample_values = currentSample[0].sample_values
+    // otu_ids = currentSample[0].otu_ids
+    // otu_ids_H = otu_ids.slice(0,10).reverse()
+    // otu_ids_H.forEach((d,i)=> {
+    //     hLabels[i] = `OTU ${d}`;
+    // })
+    // sample_values.forEach((d,i) => {
+    //     bubbleSizes[i] = d ** 1.7;
+    // })
     
-    hbarData = [{
-        type: 'bar',
-        x: sample_values.slice(0,10).sort((a,b) => a - b),
-        y: hLabels,
-        text: currentSample[0].otu_labels.slice(0,10).reverse(),
-        orientation: 'h'
-      }];
+    // hbarData = [{
+    //     type: 'bar',
+    //     x: sample_values.slice(0,10).sort((a,b) => a - b),
+    //     y: hLabels,
+    //     text: currentSample[0].otu_labels.slice(0,10).reverse(),
+    //     orientation: 'h'
+    //   }];
 
-      var bubbles = [{
-        x: otu_ids,
-        y: sample_values,
-        text: currentSample[0].otu_labels,
-        mode: 'markers',
-        marker: {
-          size: bubbleSizes,
-          sizemode: 'area',
-          color: otu_ids
-        }
-      }];
+    //   var bubbles = [{
+    //     x: otu_ids,
+    //     y: sample_values,
+    //     text: currentSample[0].otu_labels,
+    //     mode: 'markers',
+    //     marker: {
+    //       size: bubbleSizes,
+    //       sizemode: 'area',
+    //       color: otu_ids
+    //     }
+    //   }];
     
-      demoPanel.text = `id: ${currentMeta.id}`
+    //   demoPanel.text = `id: ${currentMeta.id}`
       
-      Plotly.newPlot('bar', hbarData);
-      Plotly.newPlot('bubble', bubbles);
+    //   Plotly.newPlot('bar', hbarData);
+    //   Plotly.newPlot('bubble', bubbles);
 })
 
 
@@ -92,7 +96,6 @@ d3.json('samples.json').then(function init(data){
 
 function reloadCharts() {
     dropdownMenu = d3.select("#selDataset");
-
     currentID = dropdownMenu.property("value")
     console.log(currentID)
     currentSample = samplesData.samples.filter(filterSamples)
