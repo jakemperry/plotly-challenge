@@ -113,31 +113,5 @@ function reloadCharts() {
 }
 
 
-
-//2. Create a horizontal bar chart with the selected ID
-
-
-// On change to the DOM, call getData()
-;
-
-// Function called by DOM changes
-
-
-
-
-// Update the restyled plot's values
-function updatePlotly(newdata) {
-  Plotly.restyle("bar", "hbarData", [hbarData]);
-}
-
-
 d3.selectAll("#selDataset").on("change", reloadCharts)
-// function horizontalBar(data){d3.json('samples.json').then(function show(data){
-//     console.log(data)
-    
 
-//     });
-
-// }
-
-// horizontalBar()
