@@ -51,17 +51,26 @@ function loadCharts() {
         hLabels[i] = `OTU ${d}`;
     })
     
+    //Set up data for horizontal bar chart.  Since there is only one trace, use [square brackets] to 
+    //save a step
     hbarData = [{
-        type: 'bar',
-        x: sample_values.slice(0,10).sort((a,b) => a - b),
-        y: hLabels,
-        text: currentSample[0].otu_labels.slice(0,10).reverse(),
-        orientation: 'h'
+        type: 'bar', //This makes the chart a bar chart
+        x: sample_values.slice(0,10).sort((a,b) => a - b), //Ascending values from X axis upward on chart
+        y: hLabels,  //Text labels on bar chart
+        text: currentSample[0].otu_labels.slice(0,10).reverse(), //Hover text for each bar, limit 10
+        orientation: 'h' //This makes the chart a horizontal bar chart
       }];
 
+    //Plot the horizontal bar chart
+    Plotly.newPlot('bar', hbarData);
+
+    //Make an array of bubble sizes.  Exponent of 1.7 to allow larger
+    //bacteria counts to have significantly larger bubble sizes
     sample_values.forEach((d,i) => {
         bubbleSizes[i] = d ** 1.7;
     })
+
+    //Set up bubble chart data
     var bubbles = [{
         x: otu_ids,
         y: sample_values,
@@ -73,6 +82,9 @@ function loadCharts() {
             color: otu_ids
         }
     }];
+
+    //Plot the bubble chart
+    Plotly.newPlot('bubble', bubbles);
     
     currentMeta = samplesData.metadata.filter(filterMeta)
     var metaKeys = Object.keys(currentMeta[0]);
@@ -88,8 +100,8 @@ function loadCharts() {
         <br>${metaKeys[5]}: ${metaValues[5]}
         <br>${metaKeys[6]}: ${metaValues[6]}</p>`)
 
-    Plotly.newPlot('bar', hbarData);
-    Plotly.newPlot('bubble', bubbles);
+
+    
 }
 
 //Load up the data
