@@ -31,8 +31,6 @@ d3.json('samples.json').then(function init(data){
             .text(d => d);
     console.log(samplesData)
     dropdownMenu = d3.select("#selDataset")
-    
-
     currentID = dropdownMenu.property("value")
     console.log(currentID)
     currentSample = samplesData.samples.filter(filterSamples)
@@ -98,6 +96,19 @@ function reloadCharts() {
     currentID = dropdownMenu.property("value")
     console.log(currentID)
     currentSample = samplesData.samples.filter(filterSamples)
+    currentMeta = samplesData.metadata.filter(filterMeta)
+    var metaKeys = Object.keys(currentMeta[0]);
+    var metaValues = Object.values(currentMeta[0]);
+    console.log(metaKeys)
+    console.log(metaValues)
+    d3.select('#sample-metadata')
+        .html(`<p>${metaKeys[0]}: ${metaValues[0]}
+        <br>${metaKeys[1]}: ${metaValues[1]}
+        <br>${metaKeys[2]}: ${metaValues[2]}
+        <br>${metaKeys[3]}: ${metaValues[3]}
+        <br>${metaKeys[4]}: ${metaValues[4]}
+        <br>${metaKeys[5]}: ${metaValues[5]}
+        <br>${metaKeys[6]}: ${metaValues[6]}</p>`)
     console.log("currentSample")
     console.log(currentSample)
     sample_values = currentSample[0].sample_values
