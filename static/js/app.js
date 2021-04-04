@@ -6,6 +6,7 @@ var currentSample = [];
 var hbarData = [];
 var sample_values = [];
 var otu_ids = [];
+var hLabels = [];
 
 function filterSamples(sample){
     return sample.id === currentID;
@@ -29,7 +30,6 @@ d3.json('samples.json').then(function init(data){
     sample_values = currentSample[0].sample_values
     otu_ids = currentSample[0].otu_ids
     otu_ids_H = otu_ids.slice(0,10).reverse()
-    var hLabels = []
     otu_ids_H.forEach((d,i)=> {
         hLabels[i] = `OTU ${d}`;
     })
@@ -76,7 +76,6 @@ function refreshHBar(){
     sample_values = currentSample[0].sample_values
     otu_ids = currentSample[0].otu_ids
     otu_ids_H = otu_ids.slice(0,10).reverse()
-    var hLabels = []
     otu_ids_H.forEach((d,i)=> {
         hLabels[i] = `OTU ${d}`;
     })
