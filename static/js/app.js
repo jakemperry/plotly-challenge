@@ -10,6 +10,8 @@ var otu_ids_H=[];
 var hLabels = [];
 var sample_values_H=[]
 var bubbleSizes = []
+var metaValues = []
+var metaKeys = []
 
 //Declare variables used to bind d3 to parts of the DOM
 var dropdownMenu = d3.select("#selDataset");
@@ -90,10 +92,10 @@ function loadCharts() {
     currentMeta = samplesData.metadata.filter(filterMeta)
 
     //Get all the keys from the metadata JSON
-    var metaKeys = Object.keys(currentMeta[0]);
+    metaKeys = Object.keys(currentMeta[0]);
 
     //Get all the values from the metadata JSON
-    var metaValues = Object.values(currentMeta[0]);
+    metaValues = Object.values(currentMeta[0]);
     console.log(metaKeys)
     console.log(metaValues)
 
