@@ -1,10 +1,10 @@
-function loadGauge(){
+function bob(){
 
 var data = [
     {
       type: "indicator",
       mode: "gauge+number+delta",
-      value: Object.values(currentMeta[0][6],
+      value: metaValues[6],
       title: { text: "Belly Button Washing Frequency", font: { size: 24 } },
       gauge: {
         axis: { range: [null, 9.5], nticks: 10, tickwidth: 1, tickcolor: "black" },
@@ -44,6 +44,6 @@ var data = [
   Plotly.newPlot('gauge', data, layout);
 }
 
-loadGauge() 
+// loadGauge() 
 
-  d3.select("#sample-metadata").on("change", loadGauge)
+  // d3.select("#sample-metadata").on("change", loadGauge)
