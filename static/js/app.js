@@ -112,16 +112,26 @@ function loadCharts() {
 
 //Load up the data
 d3.json('samples.json').then(function init(data){
-    samplesData = data
-    d3.select('#selDataset').selectAll('option')
+
+    //Set variable value equal to whatever is loaded from the samples JSON
+    samplesData = data 
+
+    //Use d3 to create options for dropdown menu
+    //(this is something we learned in lessons/class after this homework was assigned, this seems like 
+    //a better alternative than manually entering all of the individual ID numbers)
+    d3.select('#selDataset').selectAll('option')  
         .data(data.names)
             .enter()
             .append("option")
             .attr('value',d => d)
             .text(d => d);
     console.log(samplesData)
+
+    //Now that the drop down menu is populated, use loadCharts() to get the current selection
+    //of the dropdown menu and create charts/load metadata for the first ID in the samples JSON
     loadCharts()
 })
 
+//Set an event handler for any time the dropdown menu selection changes.  This will re-run loadCharts()
 d3.selectAll("#selDataset").on("change", loadCharts)
 
