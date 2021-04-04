@@ -41,11 +41,14 @@ d3.json('samples.json').then(function init(data){
     var metaValues = Object.values(currentMeta[0]);
     console.log(metaKeys)
     console.log(metaValues)
-    // d3.select('#sample-metadata').selectAll('p')
-    //     .data(metaKeys, metaValues)
-    //         .enter()
-    //         .append('p')
-    //         .text((a,b) => `${a}: ${b}`);
+    d3.select('#sample-metadata')
+        .html(`<p>${metaKeys[0]}: ${metaValues[0]}
+        <br>${metaKeys[1]}: ${metaValues[1]}
+        <br>${metaKeys[2]}: ${metaValues[2]}
+        <br>${metaKeys[3]}: ${metaValues[3]}
+        <br>${metaKeys[4]}: ${metaValues[4]}
+        <br>${metaKeys[5]}: ${metaValues[5]}
+        <br>${metaKeys[6]}: ${metaValues[6]}</p>`)
     console.log("currentSample")
     console.log(currentSample)
     console.log(currentMeta)
