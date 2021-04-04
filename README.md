@@ -1,30 +1,20 @@
 # Plotly Challenge
 
-### PseudoCode
-1. Use the D3 Library to read in `samples.json`.
-> Read through the `samples.json` file, and create a new list item in the dropdown select list using D3, which will be much faster and more adaptable than just writing in the html for the full dropdown list
+This dashboard displays operational taxonomic units (OTU) data for microbes that grow in people's belly buttons.
 
-2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
-- Use `sample_values` as the values for the bar chart.
-- Use `otu_ids` as the labels for the bar chart.
-- Use `otu_labels` as the overtext for the chart.
-> Check the music streaming services example and the stock prices example from class.
-> See [this plotly guide for horizontal bar charts](https://plotly.com/javascript/horizontal-bar-charts/)
+## Start Here
+A GitHub Pages site has been set up for this project [here](https://jakemperry.github.io/plotly-challenge/).
 
-3. Create a bubble chart that displays each sample.
-- Use `otu_ids` for the x values.
-- Use `sample_values` for the y values.
-- Use `sample_values` for the marker size.
-- Use `otu_ids` for the marker colors.
-- use `otu_labels` for the text values.
-> See [this plotly guide for bubble charts](https://plotly.com/javascript/bubble-charts/)
+The page will load with data for the first Test Subject ID.  Data displays include: 
+- Test subject demographic data (blue card)
+- Top 10 OTU present in test subject's navel. (horizontal bar chart)
+- A gauge that shows the number of times per week the test subject washes their navel (gauge)
+- All OTU present in the test subject's navel (bubble chart)
 
-4. Display the sample metadata, i.e., an individual's demographic information.
-> Try using [cards](https://getbootstrap.com/docs/4.0/components/card/) from Bootstrap to format the look of the demographic info.
+Hover your cursor over different bars or bubbles on the charts to see the names/labels of the OTUs.
 
-5. Display each key-value pair from the metadata JSON object somewhere on the page.
-> Get the metadata from `samples.json` and display it in the demographics card.
+A dropdown menu is provided which will show Test Subject ID Numbers for all test subjects in the dataset.  Click the dropdown menu to select a new test subject ID number.  Once the number is selected, all graphs, gauges, and demographic data will update to reflect relevant information to that test subject ID number.
 
-6. Update all of the plots any time that a new sample is selected.
-> - Make an `init()` function that will plot the first individual's data as a default when the page is first loaded.
-> - Add an `update()` function that runs any time there is a change to the dropdown selection.  This should take the individual's id and pass it into the function that makes the horizontal bar graph and the bubble plot.
+## Resources
+
+This dashboard consists of a [horizontal bar chart](https://plotly.com/javascript/horizontal-bar-charts/), a [bubble chart](https://plotly.com/javascript/bubble-charts/), and a [gauge chart](https://plotly.com/javascript/gauge-charts/) which are all based on Plotly.
