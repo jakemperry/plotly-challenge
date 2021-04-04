@@ -2,8 +2,10 @@
 
 This dashboard displays operational taxonomic units (OTU) data for microbes that grow in people's belly buttons.
 
+![screenshot](/images/BellyButtonBiodiversityDashboard.png)
+
 ## Start Here
-A GitHub Pages site has been set up for this project [here](https://jakemperry.github.io/plotly-challenge/).
+A GitHub Pages site has been set up for this project [here](https://jakemperry.github.io/plotly-challenge/).  See above for a screenshot of the site.
 
 The page will load with data for the first Test Subject ID.  Data displays include: 
 - Test subject demographic data (blue card)
@@ -18,3 +20,5 @@ A dropdown menu is provided which will show Test Subject ID Numbers for all test
 ## Resources
 
 This dashboard consists of a [horizontal bar chart](https://plotly.com/javascript/horizontal-bar-charts/), a [bubble chart](https://plotly.com/javascript/bubble-charts/), and a [gauge chart](https://plotly.com/javascript/gauge-charts/) which are all based on Plotly.
+
+JavaScript D3 is used to make an initial load of a sample data JSON and populate the dropdown menu to show options for every available test subject ID number.  D3 is also used to run event handlers so that the page updates whenever a new test subject ID number is selected from the dropdown menu.
