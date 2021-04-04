@@ -63,6 +63,7 @@ function loadCharts() {
         orientation: 'h' //This makes the chart a horizontal bar chart
       }];
 
+    //Add titles to the chart and axes using layout JSON
     var layout={
         title:  { text: `Top 10 OTU for Test Subject No. ${currentID}`, font: { size: 24 } },
         xaxis: {
@@ -96,6 +97,7 @@ function loadCharts() {
         }
     }];
 
+    //Add titles to the bubble chart and axes using layout JSON
     var bubbleLayout = {
         title: {text : `All OTU Present for Test Subject No. ${currentID}`, font: {size: 24}},
         xaxis: {
@@ -153,16 +155,16 @@ d3.json('samples.json').then(function init(data){
 
     //Now that the drop down menu is populated, use loadCharts() to get the current selection
     //of the dropdown menu and create charts/load metadata for the first ID in the samples JSON
-    loadCharts();
-    loadGauge();
-    // bob();
+
+    loadCharts(); //Run the function to update the charts
+    loadGauge(); //Load in the gauge indicator from bonus.js
 })
 
 
 //Set an event handler for any time the dropdown menu selection changes.  This will re-run loadCharts()
+
 d3.selectAll("#selDataset").on("change", function runAll(){
-    loadCharts();
-    loadGauge();
-    // bob();
+    loadCharts();  //Run the function to update the charts
+    loadGauge();  //Load in the gauge indicator from bonus.js
 })
 

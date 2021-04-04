@@ -38,7 +38,8 @@ function loadGauge(){
         }
       }
   ];
-    
+  
+  //Set up layout for the gauge
   var layout = {
     width: 450,
     height: 300,
