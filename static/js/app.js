@@ -2,7 +2,9 @@
 var samplesData = [];
 var currentID = "";
 var dropdownMenu = d3.select("#selDataset");
+var demoPanel = d3.select('#sample-metadata').selectAll('p');
 var currentSample = [];
+var currentMeta = [];
 var hbarData = [];
 var sample_values = [];
 var otu_ids = [];
@@ -15,6 +17,10 @@ function filterSamples(sample){
     return sample.id === currentID;
 }
 
+function filterMeta(metadata){
+    return metadata.id === parseInt(currentID);
+}
+
 d3.json('samples.json').then(function init(data){
     samplesData = data
     d3.select('#selDataset').selectAll('option')
@@ -25,11 +31,24 @@ d3.json('samples.json').then(function init(data){
             .text(d => d);
     console.log(samplesData)
     dropdownMenu = d3.select("#selDataset")
+    
+
     currentID = dropdownMenu.property("value")
     console.log(currentID)
     currentSample = samplesData.samples.filter(filterSamples)
+    currentMeta = samplesData.metadata.filter(filterMeta)
+    var metaKeys = Object.keys(currentMeta[0]);
+    var metaValues = Object.values(currentMeta[0]);
+    console.log(metaKeys)
+    console.log(metaValues)
+    // d3.select('#sample-metadata').selectAll('p')
+    //     .data(metaKeys, metaValues)
+    //         .enter()
+    //         .append('p')
+    //         .text((a,b) => `${a}: ${b}`);
     console.log("currentSample")
     console.log(currentSample)
+    console.log(currentMeta)
     sample_values = currentSample[0].sample_values
     otu_ids = currentSample[0].otu_ids
     otu_ids_H = otu_ids.slice(0,10).reverse()
@@ -60,6 +79,7 @@ d3.json('samples.json').then(function init(data){
         }
       }];
     
+      demoPanel.text = `id: ${currentMeta.id}`
       
       Plotly.newPlot('bar', hbarData);
       Plotly.newPlot('bubble', bubbles);
