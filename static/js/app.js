@@ -178,8 +178,8 @@ d3.json('samples.json').then(function init(data){
     //Now that the drop down menu is populated, use loadCharts() to get the current selection
     //of the dropdown menu and create charts/load metadata for the first ID in the samples JSON
     loadCharts();
-    // loadGauge();
-    bob();
+    loadGauge();
+    // bob();
 })
 
 
@@ -189,7 +189,7 @@ d3.json('samples.json').then(function init(data){
 //Set an event handler for any time the dropdown menu selection changes.  This will re-run loadCharts()
 d3.selectAll("#selDataset").on("change", function runAll(){
     loadCharts();
-    // loadGauge();
-    bob();
+    loadGauge();
+    // bob();
 })
 
