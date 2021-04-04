@@ -9,6 +9,7 @@ var otu_ids = [];
 var otu_ids_H=[];
 var hLabels = [];
 var sample_values_H=[]
+var bubbleSizes = []
 
 function filterSamples(sample){
     return sample.id === currentID;
@@ -35,6 +36,9 @@ d3.json('samples.json').then(function init(data){
     otu_ids_H.forEach((d,i)=> {
         hLabels[i] = `OTU ${d}`;
     })
+    sample_values.forEach((d,i) => {
+        bubbleSizes[i] = d ** 1.7;
+    })
     
     hbarData = [{
         type: 'bar',
@@ -43,11 +47,22 @@ d3.json('samples.json').then(function init(data){
         text: currentSample[0].otu_labels.slice(0,10).reverse(),
         orientation: 'h'
       }];
-    var layout = {
 
-    }
+      var bubbles = [{
+        x: otu_ids,
+        y: sample_values,
+        text: currentSample[0].otu_labels,
+        mode: 'markers',
+        marker: {
+          size: bubbleSizes,
+          sizemode: 'area',
+          color: otu_ids
+        }
+      }];
+    
       
       Plotly.newPlot('bar', hbarData);
+      Plotly.newPlot('bubble', bubbles);
 })
 
 
@@ -56,29 +71,45 @@ d3.json('samples.json').then(function init(data){
 
 function reloadCharts() {
     dropdownMenu = d3.select("#selDataset");
-    // Assign the value of the dropdown menu option to a variable
-    currentID = dropdownMenu.property("value");
+
+    currentID = dropdownMenu.property("value")
     console.log(currentID)
     currentSample = samplesData.samples.filter(filterSamples)
     console.log("currentSample")
     console.log(currentSample)
     sample_values = currentSample[0].sample_values
-    sample_values_H = sample_values.slice(0,10).sort((a,b) => a - b)
     otu_ids = currentSample[0].otu_ids
     otu_ids_H = otu_ids.slice(0,10).reverse()
     otu_ids_H.forEach((d,i)=> {
         hLabels[i] = `OTU ${d}`;
     })
+    sample_values.forEach((d,i) => {
+        bubbleSizes[i] = d ** 1.7;
+    })
     
     hbarData = [{
         type: 'bar',
-        x: sample_values_H,
+        x: sample_values.slice(0,10).sort((a,b) => a - b),
         y: hLabels,
         text: currentSample[0].otu_labels.slice(0,10).reverse(),
         orientation: 'h'
       }];
 
+      var bubbles = [{
+        x: otu_ids,
+        y: sample_values,
+        text: currentSample[0].otu_labels,
+        mode: 'markers',
+        marker: {
+          size: bubbleSizes,
+          sizemode: 'area',
+          color: otu_ids
+        }
+      }];
+    
+      
       Plotly.newPlot('bar', hbarData);
+      Plotly.newPlot('bubble', bubbles);
 }
 
 
