@@ -72,26 +72,35 @@ function loadCharts() {
 
     //Set up bubble chart data
     var bubbles = [{
-        x: otu_ids,
-        y: sample_values,
-        text: currentSample[0].otu_labels,
-        mode: 'markers',
+        x: otu_ids, //otu id number plotted along X axix
+        y: sample_values,  //count of otu's for each individual ID
+        text: currentSample[0].otu_labels, //hover text shows otu label names
+        mode: 'markers',  //Use large circles as markers
         marker: {
-            size: bubbleSizes,
+            size: bubbleSizes, //Use exponentially scaled bubble sizes
             sizemode: 'area',
-            color: otu_ids
+            color: otu_ids  //Use otu_ids as basis for color.  Colors change as otu_id changes
         }
     }];
 
     //Plot the bubble chart
     Plotly.newPlot('bubble', bubbles);
     
+    //Get metadata that matches current individual ID
     currentMeta = samplesData.metadata.filter(filterMeta)
+
+    //Get all the keys from the metadata JSON
     var metaKeys = Object.keys(currentMeta[0]);
+
+    //Get all the values from the metadata JSON
     var metaValues = Object.values(currentMeta[0]);
     console.log(metaKeys)
     console.log(metaValues)
+
+    //Selec the sample-metadata id in index.html
     d3.select('#sample-metadata')
+
+    //Write html to show the key and value for the current set of metadata
         .html(`<p>${metaKeys[0]}: ${metaValues[0]}
         <br>${metaKeys[1]}: ${metaValues[1]}
         <br>${metaKeys[2]}: ${metaValues[2]}
@@ -99,9 +108,6 @@ function loadCharts() {
         <br>${metaKeys[4]}: ${metaValues[4]}
         <br>${metaKeys[5]}: ${metaValues[5]}
         <br>${metaKeys[6]}: ${metaValues[6]}</p>`)
-
-
-    
 }
 
 //Load up the data
